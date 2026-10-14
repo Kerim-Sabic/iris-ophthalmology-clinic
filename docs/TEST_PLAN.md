@@ -1,0 +1,13 @@
+# Test plan
+
+| Layer | Where | What it proves | What it does not prove |
+|---|---|---|---|
+| Independent reference | `reference/reference_checks.py` + `reference/optics_fixtures.json` | Hand-authored fixture values (spec §4, §5.5, §6, §15) agree with a dense-sampling derivation (no matrices/eigenvectors) | Clinical validity |
+| Optics domain | `tests/optics.test.ts` | App's actual `optics.ts`: image lens, all classification fixtures, transposition/round trip, 45/135 alias, zero cyl, −0, parser (Unicode minus, comma decimals, missing axis, ambiguous single power, out of range, non-finite), inverse problems & rank, composition by matrices, vertex singularity, retinoscopy gross/net/no double subtraction/0.67 vs 2/3 m/streak vs meridian, JCC, reduced eye (neutralisation, line orientation, categories, real/infinite/virtual, COLC ≠ arithmetic midpoint) | |
+| Task families | `tests/missions.test.ts` | Each of 22 families is deterministic per seed and solvable for 120 seeds; requested notation scored separately; exactly one correct choice; misconception detection (gross-as-net, double WD) | Pedagogical quality |
+| Learner record | `tests/learning.test.ts` | Scheduler with controlled clock, evidence statuses, duplicate-attempt rejection, export → import into fresh profile preserving scope/history/missions, malformed import rejection, v1 → v2 migration | |
+| Cases & exams | `tests/cases_exam.test.ts` | Case coherence validator, category coverage, no diagnosis leakage in IDs, retinoscope neutralises on case target; exam pools: held-out only, quarantine/flag exclusion, one item per family, honest warning, zero-scope, reproducible snapshot | |
+| Content | `tests/content.test.ts` | 36/18/88 counts, prerequisites, cycles, orphan objectives, exam/practice family overlap, registry truthfulness | Factual accuracy |
+| Studio models | `tests/pupils|motility|fields|acuity.test.ts` | See each file (written by studio agents) | |
+| Browser E2E | `e2e/journey.spec.ts` (Edge, desktop 1440×900 and Pixel 7) | Mandatory journey: guest → scope L05+L09 → full cylinder mission incl. wrong answer feedback, transposition scrub, context-gated classification, keyboard-probed oblique lens → reload retention → +1 day clock → due review → scoped exam, reload mid-exam, submit → export → fresh profile → import → scope + attempt counts identical. Also reduced motion, storage unavailable, malformed import, 45/135 compare, refraction patient with evidence-only note | Accessibility conformance; real-device performance |
+| Screenshots | `e2e/shots.spec.ts` → `test-results/shots/` | Visual inspection inputs | |
