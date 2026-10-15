@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "test": "vitest run",
     "e2e": "playwright test",
-    "reference": "python -I reference/reference_checks.py"
+    "reference": "python -I reference/reference_checks.py",
+    "narrate": "node scripts/narrate.mjs"
   },
   "dependencies": {
     "react": "19.3.1",

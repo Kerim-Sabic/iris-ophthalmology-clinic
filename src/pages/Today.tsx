@@ -5,10 +5,14 @@ import { STUDIOS } from '../content/studios';
 import registry from '../content/TEST_REGISTRY.json';
 import { dueReviews, objectiveEvidence, DAY_MS } from '../domain/learning';
 import { OPTICS_OBJECTIVES } from '../domain/missions';
+import { TUTORIALS, WatchTutorial } from '../tutorials';
+import { watchedTutorials } from '../tutorials/narration';
 
 export function Today() {
   const { plan, attempts, clockMs } = useApp();
   const due = dueReviews(attempts, clockMs);
+  const watched = watchedTutorials();
+  const triedMission = attempts.some((a) => a.mode === 'mission');
   const included = plan ? Object.entries(plan.lectures).filter(([, s]) => s === 'included').map(([k]) => k) : [];
   const uncertain = plan ? Object.entries(plan.lectures).filter(([, s]) => s === 'uncertain').length : 0;
   const objs = LECTURES.filter((l) => included.includes(l.id)).flatMap((l) => l.objectives.map((o) => o.id));
@@ -21,19 +25,39 @@ export function Today() {
   const gapDays = lastAttempt ? Math.floor((clockMs - lastAttempt.submittedAt) / DAY_MS) : 0;
   return (
     <div className="stack">
-      <div className="panel" style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1fr) auto', gap: 16, alignItems: 'center' }}>
-        <div>
-          <h1>Solve this lens</h1>
-          <p>
-            A cylinder with its axis at 180° has 0.00 D horizontally and −4.00 D vertically. What is its power at 30°, 45° and 60° — and what should you write on the prescription?
-          </p>
-          <div className="row">
-            <a className="btn primary" href={href('lab/LAB01?mode=mission')} data-testid="start-mission">
-              Start the cylinder mission
-            </a>
-            <a className="btn" href={href('patients')}>
-              Examine a patient
-            </a>
+      <div className="panel stack">
+        <h1 style={{ marginBottom: 0 }}>Learn ophthalmology by doing it</h1>
+        <p className="muted" style={{ margin: 0 }}>Three simple steps. Each one takes a few minutes.</p>
+        <div className="path" data-testid="learning-path">
+          <div className={`path-step ${watched.length ? 'done' : ''}`}>
+            <span className="num-badge">{watched.length ? '✓' : 1}</span>
+            <b>Watch</b>
+            <span className="small">A short animated explanation with a voice. Start with the tour, then the cylinder lens.</span>
+            <div className="row">
+              <WatchTutorial id={watched.includes('tour') ? 'cylinder' : 'tour'} label={watched.includes('tour') ? 'Watch: cylinder lenses' : 'Watch the 2-minute tour'} primary />
+            </div>
+            <a className="small" href={href('learn')}>All {TUTORIALS.length} tutorials</a>
+          </div>
+          <div className={`path-step ${triedMission ? 'done' : ''}`}>
+            <span className="num-badge">{triedMission ? '✓' : 2}</span>
+            <b>Try</b>
+            <span className="small">Solve a real lens step by step: predict, check, then write the prescription yourself.</span>
+            <div className="row">
+              <a className="btn primary" href={href('lab/LAB01?mode=mission')} data-testid="start-mission">
+                Start the lens mission
+              </a>
+            </div>
+            <a className="small" href={href('patients')}>or examine a patient</a>
+          </div>
+          <div className={`path-step ${due.length === 0 && attempts.length > 0 ? 'done' : ''}`}>
+            <span className="num-badge">3</span>
+            <b>Check</b>
+            <span className="small">Come back tomorrow for a quick review on new numbers. That is what makes it stick.</span>
+            <div className="row">
+              <a className="btn" href={href('review')}>
+                {due.length ? `Review now (${due.length})` : 'Open review'}
+              </a>
+            </div>
           </div>
         </div>
       </div>

@@ -158,7 +158,7 @@ export function ConfidencePicker({ value, onChange }: { value: Confidence | null
   );
 }
 
-export function Modal({ title, onClose, children }: { title: string; onClose(): void; children: ReactNode }) {
+export function Modal({ title, onClose, children, wide }: { title: string; onClose(): void; children: ReactNode; wide?: boolean }) {
   useEffect(() => {
     const h = (e: KeyboardEvent) => e.key === 'Escape' && onClose();
     addEventListener('keydown', h);
@@ -166,7 +166,7 @@ export function Modal({ title, onClose, children }: { title: string; onClose(): 
   }, [onClose]);
   return (
     <div role="dialog" aria-modal="true" aria-label={title} style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,.4)', display: 'grid', placeItems: 'center', zIndex: 50, padding: 16 }} onClick={onClose}>
-      <div className="panel" style={{ maxWidth: 640, width: '100%', maxHeight: '85vh', overflow: 'auto' }} onClick={(e) => e.stopPropagation()}>
+      <div className="panel" style={{ maxWidth: wide ? 1000 : 640, width: '100%', maxHeight: '92vh', overflow: 'auto' }} onClick={(e) => e.stopPropagation()}>
         <div className="row" style={{ justifyContent: 'space-between' }}>
           <h2 style={{ margin: 0 }}>{title}</h2>
           <button className="btn sm" onClick={onClose} aria-label="Close">

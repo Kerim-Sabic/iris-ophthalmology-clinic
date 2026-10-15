@@ -7,9 +7,11 @@
 - `npm run reference` — independent Python reference checks (`reference/`, sampling derivation, not production code)
 - `npm run e2e` — Playwright journeys (`e2e/`), desktop + mobile; uses installed **Edge** (`channel: 'msedge'`), starts Vite on :5199
 - `npx tsc --noEmit -p tsconfig.app.json` — typecheck; `npm run build` — production build
+- `npm run narrate -- --dry-run` / `npm run narrate` — ElevenLabs tutorial narration into `public/audio/` (needs `ELEVENLABS_API_KEY` in the shell env; never stored)
 
 ## Architecture
 - `src/domain/` pure, React-free logic: `optics.ts` (ONLY place for lens math and the coordinate convention), `missions.ts` (optics task families), `learning.ts` (attempt schema, scheduler, evidence, export schema), `cases.ts` (authored refraction patients + coherence checks), `exam.ts`, plus studio models (`pupils.ts`, `motility.ts`, `fields.ts`, `acuity.ts`).
+- `src/tutorials/` narrated animated tutorials: `script.json` (narration text, single source for app + generator), `scenes.tsx` (pictures computed from the domain models), `Player.tsx`, `narration.ts` (ElevenLabs mp3 → browser voice → captions).
 - `src/lib/store.ts` IndexedDB repo (memory fallback, reported to the user); `src/app/` context + hash router.
 - `src/lab/` studio UIs; `src/lab/registry.tsx` maps studio id → component. `src/pages/` the six destinations + notebook/search/settings.
 - `src/content/` lecture data (`lectures.data*.ts`, schema in `schema.ts`), `studios.ts` (truthful status), `TEST_REGISTRY.json` (88 activities), `reference.ts` (sources, glossary, misconceptions).

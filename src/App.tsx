@@ -12,8 +12,10 @@ import { SearchPage } from './pages/Search';
 import { Settings } from './pages/Settings';
 import { Patients } from './pages/Patients';
 import { dueReviews } from './domain/learning';
+import { LearnPage, WatchTutorial, tutorialsForStudio } from './tutorials';
 
 const NAV = [
+  { path: 'learn', label: '▶ Start here' },
   { path: 'today', label: 'Today' },
   { path: 'lectures', label: 'Lectures' },
   { path: 'lab', label: 'Laboratory' },
@@ -47,6 +49,9 @@ function Shell() {
           </Suspense>
         );
       else page = <Laboratory />;
+      break;
+    case 'learn':
+      page = <LearnPage id={route.path[1]} />;
       break;
     case 'patients':
       page = <Patients id={route.path[1]} query={route.query} />;
@@ -124,8 +129,29 @@ function Shell() {
             {saveError}
           </div>
         )}
+        <HelpBar top={top} sub={route.path[1]} />
         {page}
       </main>
+    </div>
+  );
+}
+
+/** Plain-language pointer to the tutorial that explains the current screen. */
+function HelpBar({ top, sub }: { top: string; sub?: string }) {
+  let ids: string[] = [];
+  let text = '';
+  if (top === 'lab' && sub && sub !== 'catalog') {
+    ids = tutorialsForStudio(sub).map((t) => t.id);
+    text = 'New to this instrument? Watch a short animated explanation first.';
+  } else if (top === 'patients') {
+    ids = ['tour'];
+    text = 'Ask questions, do the tests you think you need, then write your note. Only what you examined counts.';
+  }
+  if (!ids.length) return null;
+  return (
+    <div className="help-bar" data-testid="help-bar">
+      <span className="small">{text}</span>
+      {ids.map((id, i) => <WatchTutorial key={id} id={id} primary={i === 0} />)}
     </div>
   );
 }
