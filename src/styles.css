@@ -228,3 +228,14 @@ details.ref > summary { cursor: pointer; font-weight: 600; padding: 6px 0; }
 .howto { margin: 4px 0 0; padding-left: 20px; }
 .howto li { margin: 2px 0; }
 @media (max-width: 820px) { .lesson-steps { grid-template-columns: 1fr 1fr; } }
+.tutorial-rx { max-width: 460px; font-size: 1.05rem; }
+.tutorial-rx td, .tutorial-rx th { padding: 10px 12px; min-width: 70px; }
+.tutorial-ladder { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; min-width: 280px; }
+.tutorial-ladder li { padding: 10px 14px; border: 2px solid var(--line); border-radius: 10px; }
+.tutorial-ladder li.on { border-color: var(--accent); background: var(--accent-soft); font-weight: 600; }
+.tutorial-ladder li.done { opacity: .5; }
+.tutorial-note { background: #fffdf5; color: #222; border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; min-height: 200px; font-family: var(--mono); font-size: .9rem; box-shadow: 0 2px 8px rgba(0,0,0,.06); }
+.note-line { margin: 0 0 8px; }
+.note-line.bad { color: #a3292e; }
+.note-line.warn { color: #8a5a00; }
+.note-line.ok { color: #23704a; }

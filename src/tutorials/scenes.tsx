@@ -11,6 +11,7 @@ import * as Pup from '../domain/pupils';
 import { LAYERS, layerAtFocus, technique, TECHNIQUE_NAME, DEFAULT_SETTINGS } from '../domain/slitlamp';
 import { CylinderCanvas, PowerGraph } from '../lab/OpticsViews';
 import type { SceneFn } from './Player';
+import { EXAM_SCENES } from './scenesExam';
 
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 const Big = ({ children }: { children: ReactNode }) => <div className="tutorial-big num">{children}</div>;
@@ -363,4 +364,4 @@ const slitlamp: SceneFn = (step, t) => {
   );
 };
 
-export const SCENES: Record<string, SceneFn> = { tour, cylinder, transpose: transposeScene, foci, retino, pupils, cover, fields, slitlamp };
+export const SCENES: Record<string, SceneFn> = { tour, cylinder, transpose: transposeScene, foci, retino, pupils, cover, fields, slitlamp, ...EXAM_SCENES };

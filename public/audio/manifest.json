@@ -190,6 +190,26 @@
   "slitlamp/rule": {
    "file": "slitlamp/rule.mp3",
    "hash": "543a3f0c"
+  },
+  "rxdesk/form": {
+   "file": "rxdesk/form.mp3",
+   "hash": "497b6683"
+  },
+  "rxdesk/separate": {
+   "file": "rxdesk/separate.mp3",
+   "hash": "d026ef54"
+  },
+  "rxdesk/cross": {
+   "file": "rxdesk/cross.mp3",
+   "hash": "2983cbd4"
+  },
+  "rxdesk/notation": {
+   "file": "rxdesk/notation.mp3",
+   "hash": "3b3480ae"
+  },
+  "note/next": {
+   "file": "note/next.mp3",
+   "hash": "05ea9cf4"
   }
  }
 }

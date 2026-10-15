@@ -32,7 +32,7 @@ test('cylinder tutorial: captions-only playback advances and scenes follow the m
   expect(errors).toEqual([]);
 });
 
-for (const id of ['transpose', 'foci', 'retino', 'pupils', 'cover', 'fields', 'slitlamp']) {
+for (const id of ['transpose', 'foci', 'retino', 'pupils', 'cover', 'fields', 'slitlamp', 'rxdesk', 'acuity', 'note']) {
   test(`tutorial ${id}: every step renders`, async ({ page }, info) => {
     const errors: string[] = [];
     page.on('pageerror', (e) => errors.push(e.message));

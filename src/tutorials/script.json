@@ -8,13 +8,34 @@
       "level": "Start here",
       "studio": null,
       "steps": [
-        { "id": "welcome", "say": "Welcome to IRIS. This is a practice clinic for ophthalmology. You learn by doing: you move instruments, examine pretend patients, and write down what you find." },
-        { "id": "today", "say": "Start every session on the Today page. It shows one thing to do next, and how many short reviews are waiting for you." },
-        { "id": "lectures", "say": "In Lectures, choose the topics your exam covers. Each lecture explains the idea simply first, then in more detail if you want it." },
-        { "id": "lab", "say": "The Laboratory has the instruments: lenses, the retinoscope, pupils, the cover test, visual fields and the slit lamp. You can move every control and watch what changes." },
-        { "id": "patients", "say": "In Patients, you examine pretend people. Ask questions, do tests, then write a short note. You only get credit for what you actually examined." },
-        { "id": "review", "say": "Exam Room and Review test you later, on new examples. That is how the app checks that you really remember, not just that you clicked through." },
-        { "id": "help", "say": "Whenever something is confusing, press the Watch tutorial button. Every tutorial can be paused, replayed, and read as text." }
+        {
+          "id": "welcome",
+          "say": "Welcome to IRIS. This is a practice clinic for ophthalmology. You learn by doing: you move instruments, examine pretend patients, and write down what you find."
+        },
+        {
+          "id": "today",
+          "say": "Start every session on the Today page. It shows one thing to do next, and how many short reviews are waiting for you."
+        },
+        {
+          "id": "lectures",
+          "say": "In Lectures, choose the topics your exam covers. Each lecture explains the idea simply first, then in more detail if you want it."
+        },
+        {
+          "id": "lab",
+          "say": "The Laboratory has the instruments: lenses, the retinoscope, pupils, the cover test, visual fields and the slit lamp. You can move every control and watch what changes."
+        },
+        {
+          "id": "patients",
+          "say": "In Patients, you examine pretend people. Ask questions, do tests, then write a short note. You only get credit for what you actually examined."
+        },
+        {
+          "id": "review",
+          "say": "Exam Room and Review test you later, on new examples. That is how the app checks that you really remember, not just that you clicked through."
+        },
+        {
+          "id": "help",
+          "say": "Whenever something is confusing, press the Watch tutorial button. Every tutorial can be paused, replayed, and read as text."
+        }
       ]
     },
     {
@@ -24,12 +45,30 @@
       "level": "Optics basics",
       "studio": "LAB01",
       "steps": [
-        { "id": "sphere", "say": "First, a normal round lens, called a sphere. It has the same power in every direction. Watch the purple line turn: the number never changes." },
-        { "id": "cylinder", "say": "Now a cylinder lens. It is strong in one direction and has no power in the other. As the purple line turns, the power changes." },
-        { "id": "axis", "say": "The black line is the axis. Along the axis, the cylinder adds nothing. Here, at one hundred and eighty degrees, the power is zero. We call that plano." },
-        { "id": "ninety", "say": "Ninety degrees away from the axis, the cylinder gives its full power. Here that is minus four dioptres." },
-        { "id": "between", "say": "In between, the power changes smoothly, not in a straight line. At thirty degrees it is minus one. At forty five, minus two. At sixty, minus three." },
-        { "id": "write", "say": "So we write this lens as plano, minus four, axis one eighty. Sphere first, then cylinder, then the axis: the direction where the cylinder does nothing." }
+        {
+          "id": "sphere",
+          "say": "First, a normal round lens, called a sphere. It has the same power in every direction. Watch the purple line turn: the number never changes."
+        },
+        {
+          "id": "cylinder",
+          "say": "Now a cylinder lens. It is strong in one direction and has no power in the other. As the purple line turns, the power changes."
+        },
+        {
+          "id": "axis",
+          "say": "The black line is the axis. Along the axis, the cylinder adds nothing. Here, at one hundred and eighty degrees, the power is zero. We call that plano."
+        },
+        {
+          "id": "ninety",
+          "say": "Ninety degrees away from the axis, the cylinder gives its full power. Here that is minus four dioptres."
+        },
+        {
+          "id": "between",
+          "say": "In between, the power changes smoothly, not in a straight line. At thirty degrees it is minus one. At forty five, minus two. At sixty, minus three."
+        },
+        {
+          "id": "write",
+          "say": "So we write this lens as plano, minus four, axis one eighty. Sphere first, then cylinder, then the axis: the direction where the cylinder does nothing."
+        }
       ]
     },
     {
@@ -39,11 +78,26 @@
       "level": "Optics basics",
       "studio": "LAB01",
       "steps": [
-        { "id": "same", "say": "One lens can be written in two ways. The blue curve shows the real power in every direction. It will not move at all in this tutorial." },
-        { "id": "minus", "say": "Written with a minus cylinder, the sphere part is plano, the green line, and the cylinder part is minus four, the purple curve." },
-        { "id": "shift", "say": "Now watch the split change. The green sphere part moves down to minus four, and the purple cylinder part flips to plus four. The blue total stays exactly the same." },
-        { "id": "rule", "say": "The rule is: add the cylinder to the sphere, change the sign of the cylinder, and turn the axis by ninety degrees. Minus four, plus four, axis ninety." },
-        { "id": "trap", "say": "A common trap: the average power, minus two, is not the same lens. It has no direction at all." }
+        {
+          "id": "same",
+          "say": "One lens can be written in two ways. The blue curve shows the real power in every direction. It will not move at all in this tutorial."
+        },
+        {
+          "id": "minus",
+          "say": "Written with a minus cylinder, the sphere part is plano, the green line, and the cylinder part is minus four, the purple curve."
+        },
+        {
+          "id": "shift",
+          "say": "Now watch the split change. The green sphere part moves down to minus four, and the purple cylinder part flips to plus four. The blue total stays exactly the same."
+        },
+        {
+          "id": "rule",
+          "say": "The rule is: add the cylinder to the sphere, change the sign of the cylinder, and turn the axis by ninety degrees. Minus four, plus four, axis ninety."
+        },
+        {
+          "id": "trap",
+          "say": "A common trap: the average power, minus two, is not the same lens. It has no direction at all."
+        }
       ]
     },
     {
@@ -53,12 +107,30 @@
       "level": "Refractive errors",
       "studio": "LAB01",
       "steps": [
-        { "id": "normal", "say": "In a normal eye, light from far away comes to one sharp point on the retina, the green line at the back." },
-        { "id": "myopia", "say": "In short sight, myopia, the focus lands in front of the retina. A minus lens moves it back." },
-        { "id": "two", "say": "With astigmatism, the eye focuses each direction at a different place. You get two focal lines instead of one point." },
-        { "id": "simple", "say": "Simple myopic astigmatism: one focal line is on the retina, the other is in front of it." },
-        { "id": "mixed", "say": "Mixed astigmatism: one focal line is in front of the retina and the other is behind it. One direction needs minus, the other needs plus." },
-        { "id": "fix", "say": "The right cylinder lens brings both lines together on the retina. Now the image is sharp again." }
+        {
+          "id": "normal",
+          "say": "In a normal eye, light from far away comes to one sharp point on the retina, the green line at the back."
+        },
+        {
+          "id": "myopia",
+          "say": "In short sight, myopia, the focus lands in front of the retina. A minus lens moves it back."
+        },
+        {
+          "id": "two",
+          "say": "With astigmatism, the eye focuses each direction at a different place. You get two focal lines instead of one point."
+        },
+        {
+          "id": "simple",
+          "say": "Simple myopic astigmatism: one focal line is on the retina, the other is in front of it."
+        },
+        {
+          "id": "mixed",
+          "say": "Mixed astigmatism: one focal line is in front of the retina and the other is behind it. One direction needs minus, the other needs plus."
+        },
+        {
+          "id": "fix",
+          "say": "The right cylinder lens brings both lines together on the retina. Now the image is sharp again."
+        }
       ]
     },
     {
@@ -68,11 +140,26 @@
       "level": "Refraction",
       "studio": "LAB02",
       "steps": [
-        { "id": "idea", "say": "In retinoscopy you shine a line of light into the eye and move it from side to side. You watch the glow inside the pupil, called the reflex." },
-        { "id": "with", "say": "If the glow moves the same way as your light, that is with motion. Add plus lenses." },
-        { "id": "against", "say": "If the glow moves the opposite way, that is against motion. Add minus lenses." },
-        { "id": "neutral", "say": "When the right lens is in front of the eye, the whole pupil lights up at once. That is neutral. Write down that lens: this is the gross result." },
-        { "id": "distance", "say": "You were sitting half a metre away, which adds plus two. So take two dioptres away from the sphere. That gives the net result, the real prescription." }
+        {
+          "id": "idea",
+          "say": "In retinoscopy you shine a line of light into the eye and move it from side to side. You watch the glow inside the pupil, called the reflex."
+        },
+        {
+          "id": "with",
+          "say": "If the glow moves the same way as your light, that is with motion. Add plus lenses."
+        },
+        {
+          "id": "against",
+          "say": "If the glow moves the opposite way, that is against motion. Add minus lenses."
+        },
+        {
+          "id": "neutral",
+          "say": "When the right lens is in front of the eye, the whole pupil lights up at once. That is neutral. Write down that lens: this is the gross result."
+        },
+        {
+          "id": "distance",
+          "say": "You were sitting half a metre away, which adds plus two. So take two dioptres away from the sphere. That gives the net result, the real prescription."
+        }
       ]
     },
     {
@@ -82,10 +169,22 @@
       "level": "Neuro-ophthalmology",
       "studio": "LAB05",
       "steps": [
-        { "id": "both", "say": "Shine a light in one eye and both pupils get smaller together. The same signal goes to both sides of the brain." },
-        { "id": "swing", "say": "Now swing the light from eye to eye. In a healthy person, both pupils stay small the whole time." },
-        { "id": "rapd", "say": "Here the right optic nerve carries a weaker signal. When the light swings to the right eye, both pupils get bigger. That is a relative afferent pupil defect." },
-        { "id": "not-big", "say": "Notice the two pupils are always the same size as each other. An afferent defect is not one big pupil. It shows only when you compare the two eyes with the swinging light." }
+        {
+          "id": "both",
+          "say": "Shine a light in one eye and both pupils get smaller together. The same signal goes to both sides of the brain."
+        },
+        {
+          "id": "swing",
+          "say": "Now swing the light from eye to eye. In a healthy person, both pupils stay small the whole time."
+        },
+        {
+          "id": "rapd",
+          "say": "Here the right optic nerve carries a weaker signal. When the light swings to the right eye, both pupils get bigger. That is a relative afferent pupil defect."
+        },
+        {
+          "id": "not-big",
+          "say": "Notice the two pupils are always the same size as each other. An afferent defect is not one big pupil. It shows only when you compare the two eyes with the swinging light."
+        }
       ]
     },
     {
@@ -95,10 +194,22 @@
       "level": "Motility",
       "studio": "LAB06",
       "steps": [
-        { "id": "look", "say": "The patient looks at a target. Here the left eye is turned inwards. You are looking at the patient, so their left eye is on your right." },
-        { "id": "cover-right", "say": "Cover the right eye, the one that was looking straight. Watch the other eye. The left eye moves outwards to take over looking at the target." },
-        { "id": "tropia", "say": "An eye that moves when you cover the other eye was already turned. That is a tropia: here, a left esotropia." },
-        { "id": "phoria", "say": "A phoria is different. Both eyes look straight until you cover one. The covered eye drifts, and when you uncover it, it moves back into line." }
+        {
+          "id": "look",
+          "say": "The patient looks at a target. Here the left eye is turned inwards. You are looking at the patient, so their left eye is on your right."
+        },
+        {
+          "id": "cover-right",
+          "say": "Cover the right eye, the one that was looking straight. Watch the other eye. The left eye moves outwards to take over looking at the target."
+        },
+        {
+          "id": "tropia",
+          "say": "An eye that moves when you cover the other eye was already turned. That is a tropia: here, a left esotropia."
+        },
+        {
+          "id": "phoria",
+          "say": "A phoria is different. Both eyes look straight until you cover one. The covered eye drifts, and when you uncover it, it moves back into line."
+        }
       ]
     },
     {
@@ -108,11 +219,26 @@
       "level": "Neuro-ophthalmology",
       "studio": "LAB07",
       "steps": [
-        { "id": "map", "say": "Each square map shows what one eye can see, as the patient sees it. Dark parts are missing vision." },
-        { "id": "nerve", "say": "Damage to one optic nerve, before the crossing, affects only that one eye." },
-        { "id": "chiasm", "say": "At the chiasm the fibres from the inner halves of both retinas cross. Damage here takes away the outer side of vision in both eyes: a bitemporal hemianopia." },
-        { "id": "tract", "say": "Behind the chiasm, the right side of the brain handles the left side of the world. Damage on the right takes away the left half of vision in both eyes." },
-        { "id": "occipital", "say": "So the rule is: if the same half is missing in both eyes, look behind the chiasm, on the opposite side of the brain." }
+        {
+          "id": "map",
+          "say": "Each square map shows what one eye can see, as the patient sees it. Dark parts are missing vision."
+        },
+        {
+          "id": "nerve",
+          "say": "Damage to one optic nerve, before the crossing, affects only that one eye."
+        },
+        {
+          "id": "chiasm",
+          "say": "At the chiasm the fibres from the inner halves of both retinas cross. Damage here takes away the outer side of vision in both eyes: a bitemporal hemianopia."
+        },
+        {
+          "id": "tract",
+          "say": "Behind the chiasm, the right side of the brain handles the left side of the world. Damage on the right takes away the left half of vision in both eyes."
+        },
+        {
+          "id": "occipital",
+          "say": "So the rule is: if the same half is missing in both eyes, look behind the chiasm, on the opposite side of the brain."
+        }
       ]
     },
     {
@@ -122,11 +248,114 @@
       "level": "Examination",
       "studio": "LAB08",
       "steps": [
-        { "id": "diffuse", "say": "Start with a wide beam to look over the whole front of the eye. You can see that something is there, but not how deep it is." },
-        { "id": "section", "say": "Make the beam thin and swing the light to the side. Now you see a slice through the cornea. This is an optical section, and it tells you which layer a finding is in." },
-        { "id": "focus", "say": "Move the focus deeper to look at the next layer, like turning pages in a book." },
-        { "id": "cone", "say": "To look for cells floating in the front chamber, use a tiny beam, turn the room lights off and use high magnification." },
-        { "id": "rule", "say": "Only write down what you actually looked at. If you did not examine a layer, do not call it normal." }
+        {
+          "id": "diffuse",
+          "say": "Start with a wide beam to look over the whole front of the eye. You can see that something is there, but not how deep it is."
+        },
+        {
+          "id": "section",
+          "say": "Make the beam thin and swing the light to the side. Now you see a slice through the cornea. This is an optical section, and it tells you which layer a finding is in."
+        },
+        {
+          "id": "focus",
+          "say": "Move the focus deeper to look at the next layer, like turning pages in a book."
+        },
+        {
+          "id": "cone",
+          "say": "To look for cells floating in the front chamber, use a tiny beam, turn the room lights off and use high magnification."
+        },
+        {
+          "id": "rule",
+          "say": "Only write down what you actually looked at. If you did not examine a layer, do not call it normal."
+        }
+      ]
+    },
+    {
+      "id": "rxdesk",
+      "title": "Writing a prescription for both eyes",
+      "minutes": 3,
+      "level": "Optics basics",
+      "studio": "LAB03",
+      "steps": [
+        {
+          "id": "form",
+          "say": "A glasses prescription has one row for each eye. OD is the right eye and OS is the left eye. Each row has a sphere, a cylinder and an axis."
+        },
+        {
+          "id": "separate",
+          "say": "Measure and write each eye on its own. The two eyes are often different, so never copy one row into the other."
+        },
+        {
+          "id": "cross",
+          "say": "If you are given the two main directions, the axis is the direction that has the sphere power. The cylinder is the difference to the other direction."
+        },
+        {
+          "id": "notation",
+          "say": "If the question asks for minus cylinder, write minus cylinder. A plus cylinder answer can describe the same lens, but it is not what was asked."
+        },
+        {
+          "id": "lensometer",
+          "say": "A lensometer reads an existing pair of glasses. Turn the power wheel until the lines look sharp, once for each direction. This tells you about the glasses, not about the eyes today."
+        }
+      ]
+    },
+    {
+      "id": "acuity",
+      "title": "Measuring visual acuity",
+      "minutes": 3,
+      "level": "Examination",
+      "studio": "LAB04",
+      "steps": [
+        {
+          "id": "fraction",
+          "say": "Visual acuity is written as two numbers, like six over twelve. The first number is how far away the patient sits, in metres. The second is the smallest line they can read."
+        },
+        {
+          "id": "one-eye",
+          "say": "Test one eye at a time with the other eye covered, and write down whether the patient was wearing glasses."
+        },
+        {
+          "id": "closer",
+          "say": "If the top line cannot be read at six metres, move the patient closer. At three metres, reading the top line is written three over sixty, not six over one hundred and twenty."
+        },
+        {
+          "id": "pinhole",
+          "say": "Next, try a pinhole. If vision gets better, the blur is probably optical and glasses may help. It does not prove that the eye is healthy."
+        },
+        {
+          "id": "low",
+          "say": "If no letters can be read even up close, check counting fingers, then hand movements, then whether the eye can see light at all. Write the distance too."
+        }
+      ]
+    },
+    {
+      "id": "note",
+      "title": "Writing a good patient note",
+      "minutes": 3,
+      "level": "Examination",
+      "studio": null,
+      "tryHref": "patients",
+      "steps": [
+        {
+          "id": "what",
+          "say": "A good note records what you found, not what you expected to find. Only write the tests you actually did."
+        },
+        {
+          "id": "order",
+          "say": "Start with the main complaint, then the history, then each test with its result, for the right eye and the left eye separately."
+        },
+        {
+          "id": "missing",
+          "say": "If you did not check something, do not write that it was normal. Leave it out, or write not examined."
+        },
+        {
+          "id": "assess",
+          "say": "Then give your assessment: what the findings point to, how sure you are, and what else it could be."
+        },
+        {
+          "id": "next",
+          "say": "Finish with the next step and how urgent it is. A clear next step is often the most important line in the note."
+        }
       ]
     }
   ]

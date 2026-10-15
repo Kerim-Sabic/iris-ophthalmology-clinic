@@ -14,6 +14,8 @@ export interface TutorialDef {
   minutes: number;
   level: string;
   studio: string | null;
+  /** Where to practise afterwards when the tutorial is not tied to a studio (route, e.g. 'patients'). */
+  tryHref?: string;
   steps: TutorialStep[];
 }
 /** A scene renders the model state for progress t ∈ [0,1] through one step. */
@@ -208,11 +210,11 @@ export function TutorialPlayer({ tutorial, scene, onClose, autoStart = false }: 
         {source === 'elevenlabs' ? 'Narration: ElevenLabs recording.' : source === 'browser' ? (voice === 'best' ? 'Narration: your browser’s built-in voice (studio recordings not generated yet).' : 'Narration: your browser’s built-in voice.') : 'Captions only.'}
         {reducedMotion && ' Reduced motion is on: each step shows its final picture without animation.'}
       </div>
-      {finished && tutorial.studio && (
+      {finished && (tutorial.studio || tutorial.tryHref) && (
         <div className="feedback good" style={{ marginTop: 8 }}>
           <strong>Now try it yourself.</strong>{' '}
-          <a className="btn sm primary" href={href(`lab/${tutorial.studio}${tutorial.studio === 'LAB01' ? '?mode=mission' : ''}`)}>
-            Open {tutorial.studio}
+          <a className="btn sm primary" href={href(tutorial.studio ? `lab/${tutorial.studio}${tutorial.studio === 'LAB01' ? '?mode=mission' : ''}` : tutorial.tryHref!)}>
+            {tutorial.studio ? `Open ${tutorial.studio}` : 'Examine a patient'}
           </a>
         </div>
       )}

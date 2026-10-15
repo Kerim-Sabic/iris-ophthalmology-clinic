@@ -157,7 +157,7 @@ function HelpBar({ top, sub }: { top: string; sub?: string }) {
     howto = HOWTO[sub] ?? [];
     text = 'How to use this screen:';
   } else if (top === 'patients') {
-    ids = ['tour'];
+    ids = ['note'];
     text = 'Ask questions, do the tests you think you need, then write your note. Only what you examined counts.';
   }
   if (!ids.length && !howto.length) return null;
