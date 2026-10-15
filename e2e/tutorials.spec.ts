@@ -54,3 +54,15 @@ test('studio help bar offers the matching tutorial', async ({ page }) => {
   await page.getByTestId('watch-pupils').click();
   await expect(page.getByTestId('tutorial-caption')).toContainText('Shine a light in one eye');
 });
+
+test('tutorials use the installed ElevenLabs recordings', async ({ page }) => {
+  const mp3s: string[] = [];
+  page.on('response', (r) => { if (r.url().endsWith('.mp3') && r.ok()) mp3s.push(r.url()); });
+  await page.goto('/#/learn/tour');
+  await page.getByRole('group', { name: 'Narration' }).getByRole('button', { name: /Voice/ }).first().click();
+  await expect(page.getByText('Narration: ElevenLabs recording.')).toBeVisible();
+  await page.getByTestId('tutorial-play').click();
+  await expect.poll(() => mp3s.some((u) => u.endsWith('/audio/tour/welcome.mp3')), { timeout: 10000 }).toBe(true);
+  await expect(page.getByTestId('tutorial-caption')).toContainText('Step 2 of 7', { timeout: 30000 });
+  await expect.poll(() => mp3s.some((u) => u.endsWith('/audio/tour/today.mp3')), { timeout: 10000 }).toBe(true);
+});

@@ -1,0 +1,195 @@
+{
+ "voice": "Natasha - Informative, Smooth and Calm",
+ "model": "ElevenLabs web app (Eleven v4)",
+ "generatedAt": "2026-10-15T00:46:39.799Z",
+ "files": {
+  "tour/welcome": {
+   "file": "tour/welcome.mp3",
+   "hash": "8a09a95b"
+  },
+  "tour/today": {
+   "file": "tour/today.mp3",
+   "hash": "c94f6c94"
+  },
+  "tour/lectures": {
+   "file": "tour/lectures.mp3",
+   "hash": "2ed1258d"
+  },
+  "tour/lab": {
+   "file": "tour/lab.mp3",
+   "hash": "b3ec4651"
+  },
+  "tour/patients": {
+   "file": "tour/patients.mp3",
+   "hash": "65d5b6a0"
+  },
+  "tour/review": {
+   "file": "tour/review.mp3",
+   "hash": "057a3562"
+  },
+  "tour/help": {
+   "file": "tour/help.mp3",
+   "hash": "e0be0094"
+  },
+  "cylinder/sphere": {
+   "file": "cylinder/sphere.mp3",
+   "hash": "3c34c076"
+  },
+  "cylinder/cylinder": {
+   "file": "cylinder/cylinder.mp3",
+   "hash": "20b6af0f"
+  },
+  "cylinder/axis": {
+   "file": "cylinder/axis.mp3",
+   "hash": "04c9ec42"
+  },
+  "cylinder/ninety": {
+   "file": "cylinder/ninety.mp3",
+   "hash": "063c12f5"
+  },
+  "cylinder/between": {
+   "file": "cylinder/between.mp3",
+   "hash": "6ef78e83"
+  },
+  "cylinder/write": {
+   "file": "cylinder/write.mp3",
+   "hash": "86e7f5fa"
+  },
+  "transpose/same": {
+   "file": "transpose/same.mp3",
+   "hash": "7ec9559d"
+  },
+  "transpose/minus": {
+   "file": "transpose/minus.mp3",
+   "hash": "8cf0f31b"
+  },
+  "transpose/shift": {
+   "file": "transpose/shift.mp3",
+   "hash": "c8b5f5e0"
+  },
+  "transpose/rule": {
+   "file": "transpose/rule.mp3",
+   "hash": "48f04f80"
+  },
+  "transpose/trap": {
+   "file": "transpose/trap.mp3",
+   "hash": "713af2aa"
+  },
+  "foci/normal": {
+   "file": "foci/normal.mp3",
+   "hash": "f36cffe2"
+  },
+  "foci/myopia": {
+   "file": "foci/myopia.mp3",
+   "hash": "fe33db2d"
+  },
+  "foci/two": {
+   "file": "foci/two.mp3",
+   "hash": "d335fcee"
+  },
+  "foci/simple": {
+   "file": "foci/simple.mp3",
+   "hash": "4f5066b4"
+  },
+  "foci/mixed": {
+   "file": "foci/mixed.mp3",
+   "hash": "fbf3eed4"
+  },
+  "foci/fix": {
+   "file": "foci/fix.mp3",
+   "hash": "d267547c"
+  },
+  "retino/idea": {
+   "file": "retino/idea.mp3",
+   "hash": "91b5c732"
+  },
+  "retino/with": {
+   "file": "retino/with.mp3",
+   "hash": "757d4311"
+  },
+  "retino/against": {
+   "file": "retino/against.mp3",
+   "hash": "ad7e805c"
+  },
+  "retino/neutral": {
+   "file": "retino/neutral.mp3",
+   "hash": "d522775f"
+  },
+  "retino/distance": {
+   "file": "retino/distance.mp3",
+   "hash": "4eb4abe9"
+  },
+  "pupils/both": {
+   "file": "pupils/both.mp3",
+   "hash": "e17c2e03"
+  },
+  "pupils/swing": {
+   "file": "pupils/swing.mp3",
+   "hash": "361c9a98"
+  },
+  "pupils/rapd": {
+   "file": "pupils/rapd.mp3",
+   "hash": "02b75dbb"
+  },
+  "pupils/not-big": {
+   "file": "pupils/not-big.mp3",
+   "hash": "875c7994"
+  },
+  "cover/look": {
+   "file": "cover/look.mp3",
+   "hash": "b63e9b6c"
+  },
+  "cover/cover-right": {
+   "file": "cover/cover-right.mp3",
+   "hash": "cf686387"
+  },
+  "cover/tropia": {
+   "file": "cover/tropia.mp3",
+   "hash": "9cdbba1a"
+  },
+  "cover/phoria": {
+   "file": "cover/phoria.mp3",
+   "hash": "24ea20af"
+  },
+  "fields/map": {
+   "file": "fields/map.mp3",
+   "hash": "36b376c0"
+  },
+  "fields/nerve": {
+   "file": "fields/nerve.mp3",
+   "hash": "08ea0372"
+  },
+  "fields/chiasm": {
+   "file": "fields/chiasm.mp3",
+   "hash": "345044d4"
+  },
+  "fields/tract": {
+   "file": "fields/tract.mp3",
+   "hash": "dc308496"
+  },
+  "fields/occipital": {
+   "file": "fields/occipital.mp3",
+   "hash": "97b24b7a"
+  },
+  "slitlamp/diffuse": {
+   "file": "slitlamp/diffuse.mp3",
+   "hash": "e1045de2"
+  },
+  "slitlamp/section": {
+   "file": "slitlamp/section.mp3",
+   "hash": "56b55750"
+  },
+  "slitlamp/focus": {
+   "file": "slitlamp/focus.mp3",
+   "hash": "a79ad261"
+  },
+  "slitlamp/cone": {
+   "file": "slitlamp/cone.mp3",
+   "hash": "5994c655"
+  },
+  "slitlamp/rule": {
+   "file": "slitlamp/rule.mp3",
+   "hash": "543a3f0c"
+  }
+ }
+}
