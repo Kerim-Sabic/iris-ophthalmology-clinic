@@ -1,54 +1,26 @@
-# React + TypeScript + Vite
+# IRIS — ophthalmology teaching clinic
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A browser-based practice clinic for medical students: animated narrated tutorials, 36 lectures, interactive studios (optics bench, retinoscopy, prescription desk, visual function, pupils, cover test, visual fields, slit lamp), fictional patients, spaced review and mock exams.
 
-Currently, two official plugins are available:
+> Educational simulation only. Content is draft and not clinically reviewed; it is not clinical advice and does not certify clinical skill.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Run locally
+```bash
+npm install
+npm run dev        # http://localhost:5173
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+## Tests
+```bash
+npm test           # unit / domain tests (Vitest)
+npm run reference  # independent Python reference checks for the optics fixtures
+npm run e2e        # browser journeys (Playwright, uses installed Microsoft Edge)
 ```
+
+## Deploy on Netlify
+The repo includes `netlify.toml` (build `npm ci && npm run build`, publish `dist`, Node 22). In Netlify: **Add new site → Import an existing project → GitHub →** pick this repository and deploy; no settings need changing. No environment variables or API keys are needed — learner progress is stored in each visitor's browser.
+
+## More
+- `CLAUDE.md` — architecture and conventions
+- `BUILD_STATUS.md` — what is built, verified and still missing
+- `docs/` — specification, simulation contracts, test plan, sources, content status
