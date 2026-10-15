@@ -66,3 +66,39 @@ test('tutorials use the installed ElevenLabs recordings', async ({ page }) => {
   await expect(page.getByTestId('tutorial-caption')).toContainText('Step 2 of 7', { timeout: 30000 });
   await expect.poll(() => mp3s.some((u) => u.endsWith('/audio/tour/today.mp3')), { timeout: 10000 }).toBe(true);
 });
+
+test('lecture page: step guide, plain-English term pop-up, read marking', async ({ page }, info) => {
+  const errors: string[] = [];
+  page.on('pageerror', (e) => errors.push(e.message));
+  await page.goto('/#/lectures/L05');
+  const steps = page.getByTestId('lesson-steps');
+  await expect(steps).toContainText('Read the essentials');
+  const term = page.locator('#reference button.term-link').first();
+  await term.click();
+  await expect(page.locator('.term-card').first()).toBeVisible();
+  await page.screenshot({ path: `test-results/shots/${info.project.name}-lecture-term.png`, fullPage: false });
+  await page.keyboard.press('Escape');
+  await expect(page.locator('.term-card')).toHaveCount(0);
+  await page.getByTestId('mark-read').click();
+  await expect(steps.locator('.lesson-step.done')).toHaveCount(1);
+  await steps.getByText(/Answer questions/).click();
+  await expect(page).toHaveURL(/#\/lectures\/L05$/);
+  expect(errors).toEqual([]);
+});
+
+test('every working studio shows a 3-step how-to', async ({ page }) => {
+  for (const id of ['LAB01', 'LAB02', 'LAB03', 'LAB04', 'LAB05', 'LAB06', 'LAB07', 'LAB08']) {
+    await page.goto(`/#/lab/${id}`);
+    await expect(page.getByTestId('help-bar').locator('ol.howto li')).toHaveCount(3);
+  }
+});
+
+test('search explains jargon in plain English; answered questions explain "why" with tappable terms', async ({ page }) => {
+  await page.goto('/#/search?q=rapd');
+  await expect(page.getByTestId('search-plain')).toContainText('weaker light signal');
+  await page.goto('/#/lectures/L09');
+  await page.locator('#questions').scrollIntoViewIfNeeded();
+  await page.locator('input[name^="mcq-"]').first().check();
+  await page.getByRole('button', { name: 'Submit', exact: true }).click();
+  await expect(page.getByTestId('mcq-explanation')).toContainText('Why:');
+});

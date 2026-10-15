@@ -136,21 +136,41 @@ function Shell() {
   );
 }
 
-/** Plain-language pointer to the tutorial that explains the current screen. */
+const HOWTO: Record<string, string[]> = {
+  LAB01: ['Start with the Intro mission: predict, then check each answer.', 'In Explore, drag the purple handle or use the arrow keys to measure any direction.', 'Stuck? Guided practice gives up to three hints; Challenge hides them.'],
+  LAB02: ['Pick a working distance, then press Sweep and watch the glow in the pupil.', 'With motion → add plus; against → add minus; whole pupil lights up → neutral, press Record.', 'Do both directions (vertical and horizontal streak), then write gross and net.'],
+  LAB03: ['Read the note on the left, then fill OD (right eye) and OS (left eye) separately.', 'Use the notation asked for (plus or minus cylinder).', 'Lensometer tab: turn the power wheel until the lines are sharp, then record it.'],
+  LAB04: ['Choose the eye, glasses or not, and distance; then present the chart.', 'Write what the patient read, e.g. 6/12. If they read nothing at 6 m, move closer.', 'Pinhole: if vision improves, the cause is probably optical.'],
+  LAB05: ['Pick the room light, then shine the torch in one eye and watch BOTH pupils.', 'Swing the light between the eyes: both pupils widening on one side = afferent defect.', 'Compare sizes in light and dark to sort out unequal pupils.'],
+  LAB06: ['Cover the eye that looks straight and watch the OTHER eye.', 'If it moves to look at the target, it was turned: a tropia.', 'If nothing moves until you uncover, it is a phoria.'],
+  LAB07: ['Click a place on the pathway to see which parts of vision disappear.', 'Same half missing in both eyes → behind the chiasm, opposite side of the brain.', 'Outer halves missing in both eyes → chiasm.'],
+  LAB08: ['Start with a wide beam to look around.', 'Make the beam thin and the angle wide to see which layer something is in.', 'Only document layers you actually looked at.'],
+};
+
+/** Plain-language pointer to the tutorial and a 3-step how-to for the current screen. */
 function HelpBar({ top, sub }: { top: string; sub?: string }) {
   let ids: string[] = [];
   let text = '';
+  let howto: string[] = [];
   if (top === 'lab' && sub && sub !== 'catalog') {
     ids = tutorialsForStudio(sub).map((t) => t.id);
-    text = 'New to this instrument? Watch a short animated explanation first.';
+    howto = HOWTO[sub] ?? [];
+    text = 'How to use this screen:';
   } else if (top === 'patients') {
     ids = ['tour'];
     text = 'Ask questions, do the tests you think you need, then write your note. Only what you examined counts.';
   }
-  if (!ids.length) return null;
+  if (!ids.length && !howto.length) return null;
   return (
     <div className="help-bar" data-testid="help-bar">
-      <span className="small">{text}</span>
+      <div style={{ flex: 1, minWidth: 220 }}>
+        <span className="small"><b>{text}</b></span>
+        {howto.length > 0 && (
+          <ol className="howto small">
+            {howto.map((h) => <li key={h}>{h}</li>)}
+          </ol>
+        )}
+      </div>
       {ids.map((id, i) => <WatchTutorial key={id} id={id} primary={i === 0} />)}
     </div>
   );

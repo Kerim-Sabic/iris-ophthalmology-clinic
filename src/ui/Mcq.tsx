@@ -4,6 +4,7 @@ import { MISCONCEPTIONS } from '../content/reference';
 import type { McqItem } from '../content/schema';
 import { now } from '../lib/store';
 import { ConfidencePicker, Feedback, type Confidence } from './kit';
+import { Glossed } from './Glossed';
 
 /** Shuffle options deterministically per item so position memory is not rewarded. */
 export function optionOrder(item: McqItem, seed: number) {
@@ -80,7 +81,12 @@ export function McqRunner({
         </>
       )}
       {done !== null && sel !== null && (
-        <Feedback tone={done ? 'good' : 'bad'} title={done ? 'Correct' : 'Not correct'} items={[...(done ? [] : [item.distractorRationale[sel] || 'This option is not supported.']), item.explanation, ...(done ? [] : item.misconceptionIds.map((m) => `Possible misconception: ${MISCONCEPTIONS[m] ?? m}`))]} />
+        <Feedback tone={done ? 'good' : 'bad'} title={done ? 'Correct' : 'Not correct'} items={[...(done ? [] : [item.distractorRationale[sel] || 'This option is not supported.']), ...(done ? [] : item.misconceptionIds.map((m) => `Possible misconception: ${MISCONCEPTIONS[m] ?? m}`))]}>
+          <p style={{ margin: '6px 0 0' }} data-testid="mcq-explanation">
+            <b>Why: </b>
+            <Glossed text={item.explanation} />
+          </p>
+        </Feedback>
       )}
       <div className="row tiny muted">
         <span>

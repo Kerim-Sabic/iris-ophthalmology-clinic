@@ -211,3 +211,20 @@ details.ref > summary { cursor: pointer; font-weight: 600; padding: 6px 0; }
   .tutorial-grid, .path { grid-template-columns: 1fr; }
   .tutorial-big { font-size: 1.1rem; }
 }
+
+/* plain-English term pop-ups */
+.term { position: relative; display: inline; }
+.term-link { all: unset; cursor: pointer; border-bottom: 2px dotted var(--accent); color: inherit; }
+.term-link:hover, .term-link[aria-expanded="true"] { background: var(--accent-soft); border-radius: 3px; }
+.term-link:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+.term-card { position: absolute; left: 0; top: calc(100% + 6px); z-index: 30; width: min(320px, 80vw); background: var(--surface); border: 1px solid var(--accent); border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,.15); padding: 10px 12px; display: flex; flex-direction: column; gap: 6px; font-size: .9rem; line-height: 1.45; font-weight: 400; text-align: left; white-space: normal; }
+.term-watch .btn { min-height: 32px; }
+.listen-btn[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+.lesson-steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.lesson-step { display: flex; gap: 8px; align-items: center; padding: 8px 10px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); text-decoration: none; color: inherit; font-size: .9rem; }
+.lesson-step .num-badge { width: 26px; height: 26px; border-radius: 50%; background: var(--surface-2); display: grid; place-items: center; font-weight: 700; flex: none; }
+.lesson-step.done { border-color: var(--good); }
+.lesson-step.done .num-badge { background: var(--good); color: #fff; }
+.howto { margin: 4px 0 0; padding-left: 20px; }
+.howto li { margin: 2px 0; }
+@media (max-width: 820px) { .lesson-steps { grid-template-columns: 1fr 1fr; } }

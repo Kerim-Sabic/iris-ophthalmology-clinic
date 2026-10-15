@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useApp } from '../app/context';
 import { href } from '../app/router';
 import { LECTURES, PRESETS, lectureById, lectureDepth } from '../content/lectures';
@@ -11,6 +11,9 @@ import registry from '../content/TEST_REGISTRY.json';
 import { now } from '../lib/store';
 import { Feedback, Pill, Seg } from '../ui/kit';
 import { McqRunner } from '../ui/Mcq';
+import { Glossed, segmentParagraphs } from '../ui/Glossed';
+import { TUTORIALS, WatchTutorial } from '../tutorials';
+import { speakBrowser, browserSpeechAvailable, watchedTutorials } from '../tutorials/narration';
 
 export function LecturesPage() {
   const { plan, plans, savePlan } = useApp();
@@ -175,6 +178,10 @@ export function LectureView({ id }: { id: string }) {
   const [note, setNote] = useState('');
   const [noteSaved, setNoteSaved] = useState(false);
   const [itemIdx, setItemIdx] = useState(0);
+  const [speaking, setSpeaking] = useState(false);
+  const [readDone, setReadDone] = useState(() => readLessons().includes(id));
+  const stopRef = useRef<() => void>(() => {});
+  useEffect(() => () => stopRef.current(), []);
   useEffect(() => {
     if (!profile) return;
     repo.notes(profile.id).then((ns) => setNote(ns.find((n) => n.ref === `lecture:${id}`)?.text ?? ''));
@@ -186,6 +193,33 @@ export function LectureView({ id }: { id: string }) {
   const studios = STUDIOS.filter((s) => l.studios.includes(s.id));
   const acts = registry.entries.filter((e) => l.activities.includes(e.id));
   const item = practice[itemIdx % Math.max(1, practice.length)];
+  const paras = level === 'essentials' ? l.essentials : level === 'full' ? l.full : l.deeper;
+  const segs = segmentParagraphs(paras); // each jargon word is linked once per section
+  const tutorial = TUTORIALS.find((t) => t.studio && l.studios.includes(t.studio));
+  const answered = attempts.filter((a) => a.lectureIds.includes(l.id) && a.taskType === 'mcq').length;
+  const triedLab = attempts.some((a) => a.lectureIds.includes(l.id) && a.taskType !== 'mcq');
+  const markRead = () => {
+    setReadDone(true);
+    saveRead(id);
+  };
+  const listen = () => {
+    if (speaking) {
+      stopRef.current();
+      setSpeaking(false);
+      return;
+    }
+    setSpeaking(true);
+    stopRef.current = speakBrowser(paras.join(' '), 1, () => {
+      setSpeaking(false);
+      markRead();
+    });
+  };
+  const steps = [
+    { label: 'Read the essentials', done: readDone, href: '', target: 'reference' },
+    ...(tutorial ? [{ label: `Watch: ${tutorial.title}`, done: watchedTutorials().includes(tutorial.id), href: href(`learn/${tutorial.id}`) }] : []),
+    { label: `Answer questions (${Math.min(answered, practice.length)}/${practice.length})`, done: answered >= practice.length && practice.length > 0, href: '', target: 'questions' },
+    ...(studios.some((s) => s.status !== 'planned') ? [{ label: 'Try it in the lab', done: triedLab, href: href(`lab/${studios.find((s) => s.status !== 'planned')!.id}`) }] : []),
+  ];
   return (
     <div className="stack">
       <div>
@@ -201,21 +235,99 @@ export function LectureView({ id }: { id: string }) {
           <Pill>≈{l.estMinutes} min (design estimate)</Pill>
         </div>
       </div>
+      <nav className="lesson-steps" aria-label="Steps for this lecture" data-testid="lesson-steps">
+        {steps.map((st, i) => (
+          <a
+            key={st.label}
+            className={`lesson-step ${st.done ? 'done' : ''}`}
+            href={st.href || undefined}
+            role={st.href ? undefined : 'button'}
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && !st.href) (e.currentTarget as HTMLElement).click();
+            }}
+            onClick={(e) => {
+              if ('target' in st && st.target) {
+                e.preventDefault();
+                document.getElementById(st.target as string)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }
+            }}
+          >
+            <span className="num-badge">{st.done ? '✓' : i + 1}</span>
+            {st.label}
+          </a>
+        ))}
+      </nav>
       {prereqWeak.length > 0 && (
-        <div className="banner">
-          <b>Bridge:</b> {l.bridge}{' '}
-          <span className="small muted">
-            Recommended first: {prereqWeak.map((p) => (
+        <details className="banner small" data-testid="bridge">
+          <summary>
+            <b>New to this? Quick recap first</b> <span className="muted">(builds on {prereqWeak.join(', ')} — optional)</span>
+          </summary>
+          <p style={{ margin: '6px 0 0' }}>
+            <Glossed text={l.bridge} />
+          </p>
+          <span className="muted">
+            Recommended first:{' '}
+            {prereqWeak.map((p) => (
               <a key={p} href={href(`lectures/${p}`)} style={{ marginRight: 6 }}>
                 {p}
               </a>
             ))}
-            — optional; you can continue here.
           </span>
-        </div>
+        </details>
       )}
       <div className="grid cols-2" style={{ alignItems: 'start' }}>
         <div className="stack">
+          <div className="panel stack" id="reference">
+            <div className="row" style={{ justifyContent: 'space-between' }}>
+              <h2 style={{ margin: 0 }}>Read</h2>
+              <Seg label="Depth" value={level} onChange={setLevel} options={[{ value: 'essentials', label: 'Essentials' }, { value: 'full', label: 'Full explanation' }, { value: 'deeper', label: 'Deeper detail' }]} />
+            </div>
+            <div className="row small">
+              {browserSpeechAvailable() && (
+                <button className="btn sm listen-btn" aria-pressed={speaking} onClick={listen} data-testid="listen">
+                  {speaking ? '■ Stop reading' : '🔊 Read it to me'}
+                </button>
+              )}
+              {tutorial && <WatchTutorial id={tutorial.id} label="Watch the animated version" />}
+              <span className="muted">Tap any underlined word for a plain-English explanation.</span>
+            </div>
+            {paras.map((p, i) => (
+              <p key={i}>
+                <Glossed text={p} segments={segs[i]} />
+              </p>
+            ))}
+            {!readDone && (
+              <button className="btn sm" onClick={markRead} data-testid="mark-read">
+                ✓ I've read this
+              </button>
+            )}
+            <details className="ref">
+              <summary>Common mistakes</summary>
+              <ul>
+                {l.misconceptions.map((m, i) => (
+                  <li key={i}>
+                    <Glossed text={m} />
+                  </li>
+                ))}
+              </ul>
+            </details>
+            <details className="ref">
+              <summary>Worked example</summary>
+              <p>{l.workedExample.problem}</p>
+              <ol>
+                {l.workedExample.steps.map((s, i) => (
+                  <li key={i}>{s}</li>
+                ))}
+              </ol>
+            </details>
+            <details className="ref">
+              <summary>Contrast: {l.contrast.a} vs {l.contrast.b}</summary>
+              <p>
+                <Glossed text={l.contrast.discriminator} />
+              </p>
+            </details>
+          </div>
           <div className="panel">
             <h2>Objectives and your evidence</h2>
             <table className="data small">
@@ -239,36 +351,6 @@ export function LectureView({ id }: { id: string }) {
             <h2>Entry challenge</h2>
             <p>{l.entryChallenge.prompt}</p>
             {entry ? <div className="feedback">{l.entryChallenge.answer}</div> : <button className="btn sm" onClick={() => setEntry(true)}>Commit to an answer in your head, then reveal</button>}
-          </div>
-          <div className="panel stack">
-            <div className="row" style={{ justifyContent: 'space-between' }}>
-              <h2 style={{ margin: 0 }}>Reference</h2>
-              <Seg label="Depth" value={level} onChange={setLevel} options={[{ value: 'essentials', label: 'Essentials' }, { value: 'full', label: 'Full explanation' }, { value: 'deeper', label: 'Deeper detail' }]} />
-            </div>
-            {(level === 'essentials' ? l.essentials : level === 'full' ? l.full : l.deeper).map((p, i) => (
-              <p key={i}>{p}</p>
-            ))}
-            <details className="ref">
-              <summary>Common mistakes</summary>
-              <ul>
-                {l.misconceptions.map((m, i) => (
-                  <li key={i}>{m}</li>
-                ))}
-              </ul>
-            </details>
-            <details className="ref">
-              <summary>Worked example</summary>
-              <p>{l.workedExample.problem}</p>
-              <ol>
-                {l.workedExample.steps.map((s, i) => (
-                  <li key={i}>{s}</li>
-                ))}
-              </ol>
-            </details>
-            <details className="ref">
-              <summary>Contrast: {l.contrast.a} vs {l.contrast.b}</summary>
-              <p>{l.contrast.discriminator}</p>
-            </details>
           </div>
         </div>
         <div className="stack">
@@ -309,7 +391,7 @@ export function LectureView({ id }: { id: string }) {
             </div>
           )}
           <div className="panel stack">
-            <h2>Independent questions</h2>
+            <h2 id="questions">Questions</h2>
             {item ? (
               <>
                 <p className="tiny muted">
@@ -364,3 +446,20 @@ export function LectureView({ id }: { id: string }) {
 }
 
 
+
+const READ_KEY = 'iris.lessonsRead';
+function readLessons(): string[] {
+  try {
+    const v = JSON.parse(localStorage.getItem(READ_KEY) ?? '[]');
+    return Array.isArray(v) ? v : [];
+  } catch {
+    return [];
+  }
+}
+function saveRead(id: string) {
+  try {
+    localStorage.setItem(READ_KEY, JSON.stringify([...new Set([...readLessons(), id])]));
+  } catch {
+    /* per-browser convenience only */
+  }
+}
