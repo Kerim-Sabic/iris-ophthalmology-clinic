@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useApp } from '../app/context';
 import { href } from '../app/router';
-import { CASES, caseById, expectedClass, type CaseDef, type Eye } from '../domain/cases';
+import { CASES, CLINICAL_CASES, caseById, clinicalCaseById, expectedClass, type CaseDef, type Eye } from '../domain/cases';
+import { ClinicalCaseView } from './ClinicalCase';
 import { CLASS_LABEL, fmtD, formatRx, gradeLens, makeLens, worstMeridian, subMatrices, toMatrix, type RefractiveClass, type SpheroCyl } from '../domain/optics';
 import { JccTool } from '../lab/JccTool';
 import { Retinoscope, type RetinoRecord } from '../lab/Retinoscope';
@@ -30,11 +31,14 @@ const TEST_LABEL: Record<TestId, string> = {
 export function Patients({ id }: { id?: string; query: URLSearchParams }) {
   if (id) {
     const c = caseById(id);
-    return c ? <CaseView c={c} /> : <Feedback tone="bad" title="Case not found" />;
+    if (c) return <CaseView c={c} />;
+    const k = clinicalCaseById(id);
+    return k ? <ClinicalCaseView c={k} /> : <Feedback tone="bad" title="Case not found" />;
   }
   return (
     <div className="stack">
       <h1>Patients</h1>
+      <h2>Refraction</h2>
       <p className="small muted">Fictional, authored refraction patients. The case title never reveals the answer. Every instrument reads the same hidden target refraction; only what you examine appears in your note. Content status: draft, not clinically reviewed.</p>
       <div className="cards">
         {CASES.map((c) => (
@@ -47,7 +51,20 @@ export function Patients({ id }: { id?: string; query: URLSearchParams }) {
           </a>
         ))}
       </div>
-      <div className="panel small muted">More case families (red eye, glaucoma assessment, pupils, fields, trauma) are planned with LAB05–LAB18 and are not shown until they exist.</div>
+      <h2>Pupils, visual pathway and alignment</h2>
+      <p className="small muted">Fictional, authored patients examined with the same pupil, field and cover-test models as LAB05–LAB07. Titles never reveal the finding.</p>
+      <div className="cards">
+        {CLINICAL_CASES.map((c) => (
+          <a key={c.id} className="card" href={href(`patients/${c.id}`)} style={{ textDecoration: 'none', color: 'inherit' }} data-testid={`case-${c.label}`}>
+            <h3>{c.label}</h3>
+            <p className="small">
+              {c.name}, {c.age}
+            </p>
+            <p className="small muted">{c.complaint}</p>
+          </a>
+        ))}
+      </div>
+      <div className="panel small muted">Red eye, glaucoma assessment, trauma and paediatric red-reflex case families are planned with LAB08–LAB18 and are not shown until they exist.</div>
     </div>
   );
 }

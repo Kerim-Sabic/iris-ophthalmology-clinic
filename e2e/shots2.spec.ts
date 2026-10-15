@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-for (const id of ['LAB02', 'LAB03', 'LAB04', 'LAB05', 'LAB06', 'LAB07']) {
+for (const id of ['LAB02', 'LAB03', 'LAB04', 'LAB05', 'LAB06', 'LAB07', 'LAB08']) {
   test(`studio ${id} renders and interacts`, async ({ page }, info) => {
     const errors: string[] = [];
     page.on('pageerror', (e) => errors.push(e.message));

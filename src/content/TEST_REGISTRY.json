@@ -25,7 +25,8 @@
    "implementedIn": "lab/LAB04",
    "sources": [],
    "evidence": [
-    "tests/acuity.test.ts"
+    "tests/acuity.test.ts",
+    "e2e/studios.spec.ts LAB04"
    ]
   },
   {
@@ -533,7 +534,8 @@
    "implementedIn": "lab/LAB05",
    "sources": [],
    "evidence": [
-    "tests/pupils.test.ts"
+    "tests/pupils.test.ts",
+    "e2e/studios.spec.ts LAB05"
    ]
   },
   {
@@ -559,7 +561,8 @@
    "implementedIn": "lab/LAB05",
    "sources": [],
    "evidence": [
-    "tests/pupils.test.ts"
+    "tests/pupils.test.ts",
+    "e2e/studios.spec.ts LAB05 + clinical cases"
    ]
   },
   {
@@ -585,7 +588,8 @@
    "implementedIn": "lab/LAB05",
    "sources": [],
    "evidence": [
-    "tests/pupils.test.ts"
+    "tests/pupils.test.ts",
+    "e2e/studios.spec.ts LAB05 + clinical cases"
    ]
   },
   {
@@ -735,7 +739,8 @@
    "implementedIn": "lab/LAB06",
    "sources": [],
    "evidence": [
-    "tests/motility.test.ts K2 fixture"
+    "tests/motility.test.ts K2 fixture",
+    "e2e/studios.spec.ts LAB06 + clinical case L"
    ]
   },
   {
@@ -761,7 +766,8 @@
    "implementedIn": "lab/LAB06",
    "sources": [],
    "evidence": [
-    "tests/motility.test.ts"
+    "tests/motility.test.ts",
+    "e2e/studios.spec.ts LAB06"
    ]
   },
   {
@@ -931,7 +937,8 @@
    "implementedIn": "lab/LAB07",
    "sources": [],
    "evidence": [
-    "tests/fields.test.ts"
+    "tests/fields.test.ts",
+    "clinical cases I–K (tests/clinicalCases.test.ts)"
    ]
   },
   {
@@ -1015,22 +1022,24 @@
    "depth": "Core",
    "requiredAction": "Inspect lids, conjunctiva, sclera, cornea and pupil systematically",
    "safeguard": "Observation is not equivalent to a complete slit-lamp examination",
-   "implementation": "planned",
+   "implementation": "partial",
    "humanReview": "not-reviewed",
    "sourceStatus": "unsourced",
-   "fidelity": "none",
+   "fidelity": "conceptual schematic",
    "capabilities": {
-    "conceptExplanation": false,
+    "conceptExplanation": true,
     "interactiveMechanism": false,
-    "sequencePractice": false,
+    "sequencePractice": true,
     "resultInterpretation": false,
     "documentationPractice": false,
     "assessedTransfer": false,
     "requiresSupervisedPhysicalPractice": true
    },
-   "implementedIn": null,
+   "implementedIn": "lab/LAB08",
    "sources": [],
-   "evidence": []
+   "evidence": [
+    "penlight sequence with authored observations; unscored"
+   ]
   },
   {
    "id": "T042",
@@ -1039,22 +1048,25 @@
    "depth": "Core",
    "requiredAction": "Adjust light and identify the visible region",
    "safeguard": "An illumination control must change what can actually be observed",
-   "implementation": "planned",
+   "implementation": "tested",
    "humanReview": "not-reviewed",
    "sourceStatus": "unsourced",
-   "fidelity": "none",
+   "fidelity": "constrained procedural simulation",
    "capabilities": {
-    "conceptExplanation": false,
-    "interactiveMechanism": false,
-    "sequencePractice": false,
-    "resultInterpretation": false,
-    "documentationPractice": false,
+    "conceptExplanation": true,
+    "interactiveMechanism": true,
+    "sequencePractice": true,
+    "resultInterpretation": true,
+    "documentationPractice": true,
     "assessedTransfer": false,
     "requiresSupervisedPhysicalPractice": true
    },
-   "implementedIn": null,
+   "implementedIn": "lab/LAB08",
    "sources": [],
-   "evidence": []
+   "evidence": [
+    "tests/slitlamp.test.ts",
+    "e2e/studios.spec.ts LAB08"
+   ]
   },
   {
    "id": "T043",
@@ -1063,22 +1075,25 @@
    "depth": "Core",
    "requiredAction": "Adjust beam angle, width and focus to identify depth",
    "safeguard": "A slit graphic pasted over a photo is not a depth model",
-   "implementation": "planned",
+   "implementation": "tested",
    "humanReview": "not-reviewed",
    "sourceStatus": "unsourced",
-   "fidelity": "none",
+   "fidelity": "constrained procedural simulation",
    "capabilities": {
-    "conceptExplanation": false,
-    "interactiveMechanism": false,
-    "sequencePractice": false,
-    "resultInterpretation": false,
-    "documentationPractice": false,
+    "conceptExplanation": true,
+    "interactiveMechanism": true,
+    "sequencePractice": true,
+    "resultInterpretation": true,
+    "documentationPractice": true,
     "assessedTransfer": false,
     "requiresSupervisedPhysicalPractice": true
    },
-   "implementedIn": null,
+   "implementedIn": "lab/LAB08",
    "sources": [],
-   "evidence": []
+   "evidence": [
+    "tests/slitlamp.test.ts",
+    "e2e/studios.spec.ts LAB08"
+   ]
   },
   {
    "id": "T044",
@@ -1087,22 +1102,24 @@
    "depth": "Extension",
    "requiredAction": "Choose illumination and identify a supplied media abnormality",
    "safeguard": "Do not alter clinical-image pathology through cosmetic effects",
-   "implementation": "planned",
+   "implementation": "tested",
    "humanReview": "not-reviewed",
    "sourceStatus": "unsourced",
-   "fidelity": "none",
+   "fidelity": "constrained procedural simulation",
    "capabilities": {
-    "conceptExplanation": false,
-    "interactiveMechanism": false,
+    "conceptExplanation": true,
+    "interactiveMechanism": true,
     "sequencePractice": false,
-    "resultInterpretation": false,
-    "documentationPractice": false,
+    "resultInterpretation": true,
+    "documentationPractice": true,
     "assessedTransfer": false,
     "requiresSupervisedPhysicalPractice": true
    },
-   "implementedIn": null,
+   "implementedIn": "lab/LAB08",
    "sources": [],
-   "evidence": []
+   "evidence": [
+    "tests/slitlamp.test.ts retroillumination"
+   ]
   },
   {
    "id": "T045",
@@ -1135,22 +1152,24 @@
    "depth": "Core",
    "requiredAction": "Describe a standardized illustrative field and apply a verified grading system",
    "safeguard": "Do not invent cell counts or grade boundaries",
-   "implementation": "planned",
+   "implementation": "partial",
    "humanReview": "not-reviewed",
    "sourceStatus": "unsourced",
-   "fidelity": "none",
+   "fidelity": "conceptual schematic",
    "capabilities": {
-    "conceptExplanation": false,
-    "interactiveMechanism": false,
+    "conceptExplanation": true,
+    "interactiveMechanism": true,
     "sequencePractice": false,
-    "resultInterpretation": false,
+    "resultInterpretation": true,
     "documentationPractice": false,
     "assessedTransfer": false,
     "requiresSupervisedPhysicalPractice": true
    },
-   "implementedIn": null,
+   "implementedIn": "lab/LAB08",
    "sources": [],
-   "evidence": []
+   "evidence": [
+    "cells visible only with conical beam/dark/≥16×; no grading standard applied"
+   ]
   },
   {
    "id": "T047",

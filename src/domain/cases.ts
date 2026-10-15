@@ -234,3 +234,6 @@ export function validateCase(c: CaseDef): string[] {
   if (!c.nextActions.some((n) => n.correct)) errs.push(`${c.id}: no defensible next action`);
   return errs;
 }
+
+// Non-refractive case families share this engine entry point.
+export * from './clinicalCases';
