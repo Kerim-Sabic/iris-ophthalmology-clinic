@@ -11,6 +11,7 @@
 
 ## Architecture
 - `src/domain/` pure, React-free logic: `optics.ts` (ONLY place for lens math and the coordinate convention), `missions.ts` (optics task families), `learning.ts` (attempt schema, scheduler, evidence, export schema), `cases.ts` (authored refraction patients + coherence checks), `exam.ts`, plus studio models (`pupils.ts`, `motility.ts`, `fields.ts`, `acuity.ts`).
+- `src/domain/diagnosis.ts` lecture visus notation (VOD/VOS sc/cc dsph/dcyl ax, Add, za blizu, Age) → tokens, diagnosis (Latin), presbyopia, free-text answer parser, grading, exercise generator; UI in `src/dg/` (route `#/dg/learn|examples|practice|exam|sheet`).
 - `src/tutorials/` narrated animated tutorials: `script.json` (narration text, single source for app + generator), `scenes.tsx` (pictures computed from the domain models), `Player.tsx`, `narration.ts` (ElevenLabs mp3 → browser voice → captions).
 - `src/lib/store.ts` IndexedDB repo (memory fallback, reported to the user); `src/app/` context + hash router.
 - `src/lab/` studio UIs; `src/lab/registry.tsx` maps studio id → component. `src/pages/` the six destinations + notebook/search/settings.

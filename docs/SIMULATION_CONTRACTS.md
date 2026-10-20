@@ -52,3 +52,14 @@ Every simulation states its assumptions here. Numerical tests (see TEST_PLAN.md)
 - One case truth (pupil finding, field lesion, motility finding, authored acuity) drives every station through the LAB05 (`pupils.ts`), LAB07 (`fields.ts`) and LAB06 (`motility.ts`) models.
 - `validateClinicalCase` cross-checks stations: optic-nerve field loss ⇔ same-side afferent defect + acuity not restored by pinhole; chiasmal/retrochiasmal cases keep pupils normal and acuity preserved (teaching set); efferent pupil cases have no field defect; fixing eye not worse than the deviating eye; identifiers do not leak findings.
 - Grading per dimension (pupils, fields, alignment, localisation, next action, baseline acuity). A finding documented without the examination is "unsupported"; "not examined" is accepted as honest but leaves an abnormal system's assessment incomplete. Notes list only performed actions.
+
+
+## 8. Diagnosis writing from visus notation (`src/domain/diagnosis.ts`)
+- Notation: `VOD|VOS|VOU: sc <decimal>, cc <±S dsph> <±C dcyl ax A> <decimal>`; context lines `Age: N`, `VOU: Add +X dsph`, `VOD za blizu: cc … J1`. Comma decimals, Unicode minus, `x` for axis accepted; the lecture typo `-.0.50` is read as −0.50 with a visible warning. Unknown words are reported, never guessed.
+- The cc lens that reaches the stated acuity is treated as the full distance correction (lecture convention) and classified with `optics.classify` from both principal powers. Latin names: Emmetropia, Myopia, Hypermetropia, Astigmatismus myopicus/hypermetropicus simplex/compositus, Astigmatismus mixtus.
+- Orientation from the MINUS-cylinder axis: ±30° of 180 → rectus, ±30° of 90 → inversus, otherwise obliquus (plus cylinders are transposed first). Generated cases avoid the 30° boundaries. Orientation is graded as an optional dimension.
+- VA 1.0 sc with no lens → Emmetropia (with a latent-hyperopia caveat). Reduced sc with no lens → no refractive diagnosis. cc acuity < 1.0 → must be noted (further examination).
+- Anisometropia (SE difference): ≥2.00 D expected, 1.00–1.99 D accepted either way, <1.00 D not expected — thresholds vary between textbooks.
+- Presbyopia only when a near addition was needed (Add, or a near lens more plus than the distance lens). Age alone → not diagnosed (explicit feedback). Reading lens = distance + ADD, cylinder/axis unchanged. ADD values in generated cases are fictional measurements, never derived from age.
+- Written answers are parsed (Latin / English / Bosnian-Croatian-Serbian terms, eye labels required) and the parsed reading is shown before grading. Scored separately: per-eye diagnosis, orientation, reduced-BCVA note, laterality swap, anisometropia, presbyopia, unsupported additions (keratoconus, glaucoma, cataract).
+- Generated uncorrected acuities are illustrative only; the diagnosis never depends on them.

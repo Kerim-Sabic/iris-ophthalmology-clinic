@@ -16,7 +16,7 @@ test('mandatory first journey: scope → mission → reload → review → exam 
   const errors: string[] = [];
   page.on('pageerror', (e) => errors.push(e.message));
   await page.goto('/#/today');
-  await expect(page.getByTestId('learning-path')).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'What do you want to do?' })).toBeVisible();
 
   // scope: L05 + one clinical lecture (L09)
   await page.goto('/#/lectures');

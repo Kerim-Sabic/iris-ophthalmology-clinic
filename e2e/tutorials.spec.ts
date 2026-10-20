@@ -1,9 +1,11 @@
 import { expect, test } from '@playwright/test';
 
-test('Today shows a simple Watch → Try → Check path; tour opens in a player', async ({ page }, info) => {
+test('Home: three big choices; the 3-step path opens under More; tour opens in a player', async ({ page }, info) => {
   const errors: string[] = [];
   page.on('pageerror', (e) => errors.push(e.message));
   await page.goto('/#/today');
+  await expect(page.getByTestId('hero-dg')).toBeVisible();
+  await page.getByText('More: the 3-step path').click();
   await expect(page.getByTestId('learning-path')).toBeVisible();
   await page.screenshot({ path: `test-results/shots/${info.project.name}-today-path.png`, fullPage: true });
   await page.getByTestId('watch-tour').click();

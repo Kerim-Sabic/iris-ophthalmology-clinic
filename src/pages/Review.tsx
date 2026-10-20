@@ -6,6 +6,8 @@ import { deriveReviewStates, dueReviews, REVIEW_POLICY, type ReviewState } from 
 import { familyById } from '../domain/missions';
 import { TaskRunner } from '../lab/TaskRunner';
 import { McqRunner } from '../ui/Mcq';
+import { DgExerciseCard } from '../dg/ExerciseCard';
+import { makeExercise } from '../dg/DiagnosisPage';
 
 function seedFor(r: ReviewState) {
   // A new numerical variant for each scheduled check, reproducible for that due time.
@@ -30,6 +32,11 @@ export function Review() {
     if (!current) return null;
     const fam = familyById(current.familyId);
     if (fam) return { kind: 'optics' as const, task: fam.make(seedFor(current)) };
+    if (current.familyId.startsWith('F-DG-')) {
+      const focus = current.familyId.slice(5);
+      const ex = makeExercise(seedFor(current), (focus === 'emmetropic' ? 'any' : focus) as Parameters<typeof makeExercise>[1]);
+      return { kind: 'dg' as const, ex: { ...ex, familyId: current.familyId } };
+    }
     const items = ALL_ITEMS.filter((i) => i.familyId === current.familyId && i.pool === 'practice');
     if (!items.length) return null;
     return { kind: 'mcq' as const, item: items[seedFor(current) % items.length] };
@@ -55,7 +62,9 @@ export function Review() {
               {queue.length} remaining today
             </span>
           </div>
-          {task.kind === 'optics' ? (
+          {task.kind === 'dg' ? (
+            <DgExerciseCard exercise={task.ex} mode="review" defaultInput="write" onNext={() => { setDoneIds([...doneIds, current.familyId]); setActive(null); }} />
+          ) : task.kind === 'optics' ? (
             <TaskRunner
               task={task.task}
               mode="review"

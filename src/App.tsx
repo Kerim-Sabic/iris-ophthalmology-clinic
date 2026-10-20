@@ -13,10 +13,12 @@ import { Settings } from './pages/Settings';
 import { Patients } from './pages/Patients';
 import { dueReviews } from './domain/learning';
 import { LearnPage, WatchTutorial, tutorialsForStudio } from './tutorials';
+import { DiagnosisPage } from './dg/DiagnosisPage';
 
 const NAV = [
-  { path: 'learn', label: '▶ Start here' },
-  { path: 'today', label: 'Today' },
+  { path: 'today', label: 'Home' },
+  { path: 'dg', label: '✍ Write a diagnosis' },
+  { path: 'learn', label: '▶ Tutorials' },
   { path: 'lectures', label: 'Lectures' },
   { path: 'lab', label: 'Laboratory' },
   { path: 'patients', label: 'Patients' },
@@ -49,6 +51,9 @@ function Shell() {
           </Suspense>
         );
       else page = <Laboratory />;
+      break;
+    case 'dg':
+      page = <DiagnosisPage tab={route.path[1]} />;
       break;
     case 'learn':
       page = <LearnPage id={route.path[1]} />;

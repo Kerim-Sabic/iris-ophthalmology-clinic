@@ -25,8 +25,36 @@ export function Today() {
   const gapDays = lastAttempt ? Math.floor((clockMs - lastAttempt.submittedAt) / DAY_MS) : 0;
   return (
     <div className="stack">
+      <div className="hero">
+        <h1>What do you want to do?</h1>
+        <div className="hero-tiles">
+          <a className="hero-tile primary" href={href('dg/learn')} data-testid="hero-dg">
+            <span className="hero-icon" aria-hidden>✍</span>
+            <b>Write a diagnosis</b>
+            <span>From a lecture line like <span className="num">VOD: sc 0.5, cc −1.00 dsph 1.0 Dg?</span> to the correct Dg — with your professor’s examples.</span>
+          </a>
+          <a className="hero-tile" href={href('lab/LAB01?mode=mission')}>
+            <span className="hero-icon" aria-hidden>◎</span>
+            <b>Understand lenses</b>
+            <span>Why a cylinder has power in one direction only — solve a lens step by step.</span>
+          </a>
+          <a className="hero-tile" href={href('learn')}>
+            <span className="hero-icon" aria-hidden>▶</span>
+            <b>Watch a short tour</b>
+            <span>Two minutes, with a voice: what is in this app and where to start.</span>
+          </a>
+        </div>
+        {due.length > 0 && (
+          <a className="btn" href={href('review')} style={{ alignSelf: 'flex-start' }}>
+            {due.length} quick review{due.length > 1 ? 's' : ''} waiting ▶
+          </a>
+        )}
+      </div>
+      <details className="panel">
+        <summary><b>More: the 3-step path, your progress and what this app contains</b></summary>
+      <div className="stack" style={{ marginTop: 10 }}>
       <div className="panel stack">
-        <h1 style={{ marginBottom: 0 }}>Learn ophthalmology by doing it</h1>
+        <h2 style={{ marginBottom: 0 }}>Learn ophthalmology by doing it</h2>
         <p className="muted" style={{ margin: 0 }}>Three simple steps. Each one takes a few minutes.</p>
         <div className="path" data-testid="learning-path">
           <div className={`path-step ${watched.length ? 'done' : ''}`}>
@@ -120,6 +148,8 @@ export function Today() {
         </p>
         <a href={href('lab')}>See the laboratory status</a>
       </div>
+      </div>
+      </details>
     </div>
   );
 }
