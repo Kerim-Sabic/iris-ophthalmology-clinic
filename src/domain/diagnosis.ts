@@ -396,8 +396,10 @@ export function diagnosePair(lines: VisusLine[]): PairDiagnosis {
   if (aniso === 'expected') notes.push(`The eyes differ by ${diff!.toFixed(2)} D (spherical equivalent): name the anisometropia as well.`);
   if (aniso === 'optional') notes.push(`The eyes differ by ${diff!.toFixed(2)} D. Some texts already call ≥1 D anisometropia; mentioning it is accepted but not required here.`);
   const parts = eyes.map((e) => e.latin);
-  const same = od && os && od.outcome.kind === 'refractive' && os.outcome.kind === 'refractive' && od.outcome.cls === os.outcome.cls && od.outcome.orientation === os.outcome.orientation;
-  let sentence = same ? `${od!.latin.replace(/ OD$/, '')} OU` : parts.join('; ');
+  // identical names in both eyes (refractive or emmetropic) are written once with OU
+  const nameOf = (d: EyeDiagnosis) => (d.outcome.kind === 'insufficient' ? null : d.latin.replace(/ (OD|OS|OU)$/, ''));
+  const same = !!od && !!os && nameOf(od) !== null && nameOf(od) === nameOf(os);
+  let sentence = same ? `${nameOf(od!)} OU` : parts.join('; ');
   if (aniso === 'expected') sentence += '; Anisometropia';
   // presbyopia: only from near data (an ADD, or a near lens more plus than the distance lens) — never from age alone
   const ageY = lines.map((l) => l.ageY).find((a) => a !== null) ?? null;

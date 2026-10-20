@@ -11,7 +11,8 @@
     "test": "vitest run",
     "e2e": "playwright test",
     "reference": "python -I reference/reference_checks.py",
-    "narrate": "node scripts/narrate.mjs"
+    "narrate": "node scripts/narrate.mjs",
+    "e2e:prod": "npm run build && node -e \"process.env.E2E_PROD=1;require('child_process').execSync('npx playwright test',{stdio:'inherit',env:process.env})\""
   },
   "dependencies": {
     "react": "19.3.1",

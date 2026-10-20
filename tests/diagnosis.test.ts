@@ -181,7 +181,7 @@ describe('presbyopia', () => {
     expect(p.presbyopia.nearLenses[0].lens).toEqual({ sphereD: 1, cylinderD: 0, axisDeg: null });
     expect(p.sentence).toBe('Dg: Myopia OU; Presbyopia');
     const e = pd(PRESBYOPIA_EXAMPLES[0].lines);
-    expect(e.sentence).toBe('Dg: Emmetropia OD; Emmetropia OS; Presbyopia');
+    expect(e.sentence).toBe('Dg: Emmetropia OU; Presbyopia');
     expect(e.presbyopia.nearLenses[0].lens.sphereD).toBe(1.75);
   });
   it('near ("za blizu") lens gives the ADD as near minus distance', () => {
@@ -223,5 +223,24 @@ describe('presbyopia', () => {
     }
     expect(pres).toBeGreaterThan(100);
     expect(ageOnly).toBeGreaterThan(20);
+  });
+});
+
+describe('composer answers', () => {
+  it('a structured answer equal to the expected diagnosis grades correct for 2000 generated pairs', () => {
+    for (let s = 1; s <= 2000; s++) {
+      const pd = diagnosePair(generateExercise(s).lines.map(parseVisusLine));
+      const ans: PairAnswer = {
+        eyes: Object.fromEntries(pd.eyes.map((e) => [e.eye, {
+          cls: e.outcome.kind === 'refractive' ? e.outcome.cls : e.outcome.kind === 'emmetropic-by-acuity' ? 'emmetropic' : 'cannot',
+          orientation: e.outcome.kind === 'refractive' && e.outcome.orientation ? e.outcome.orientation : '',
+          flagBcva: e.outcome.kind === 'refractive' && e.outcome.bcvaReduced,
+        }])),
+        anisometropia: pd.anisometropia === 'expected',
+        unsupported: [],
+        presbyopia: pd.presbyopia.status === 'expected',
+      };
+      expect(gradePair(pd, ans).correct).toBe(true);
+    }
   });
 });
